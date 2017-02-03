@@ -29,4 +29,5 @@ export function reducer(state: any, action: any) {
 const getThemeState = (state: State) => state && state.theme;
 
 export const getTheme = createSelector(getThemeState, fromTheme.getTheme);
+export const getThemeValue = createSelector(getThemeState, fromTheme.getThemeValue);
 export const getKeys = createSelector(getThemeState, fromTheme.getKeys);

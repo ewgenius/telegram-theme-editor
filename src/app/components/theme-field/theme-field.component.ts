@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ThemeFieldComponent {
   @Input() key: string;
+  @Input() keys: string[];
   @Input() value: string;
   @Output() onChange = new EventEmitter<{
     key: string,

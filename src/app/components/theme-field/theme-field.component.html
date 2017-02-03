@@ -1,2 +1,5 @@
 <label>{{key}}</label>
-<input [value]="value" (keyup)="change($event)"/>
+<input [value]="value" (keyup)="change($event)" />
+<select>
+  <option *ngFor="let key of keys" value="key">{{key}}</option>
+</select>

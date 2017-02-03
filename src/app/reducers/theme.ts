@@ -1,5 +1,5 @@
 import { ActionTypes, Actions, SetPropertyAction, RefPropertyAction } from '../actions/theme';
-import { TelegramTheme, hasProperty, defaultTheme } from '../lib/telegram-theme';
+import { TelegramTheme, hasProperty, getProperty, defaultTheme } from '../lib/telegram-theme';
 
 export type State = TelegramTheme;
 
@@ -39,4 +39,10 @@ export function reducer(state = initialState, action: Actions) {
 }
 
 export const getTheme = (state: State) => state;
+
+export const getThemeValue = (state: State) => Object.keys(state).reduce((t, key) => {
+  t[key] = getProperty(state, key);
+  return t;
+}, {});
+
 export const getKeys = (state: State) => Object.keys(state);
