@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  font-size: 12px;
+  label {
+    flex: 2;
+  }
+  input {
+    flex: 1;
+  }
+}
