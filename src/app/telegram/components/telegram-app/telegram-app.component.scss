@@ -1,0 +1,13 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  telegram-chats-list {
+    height: 100%;
+  }
+  telegram-chat-view {
+    height: 100%;
+  }
+}

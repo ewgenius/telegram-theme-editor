@@ -1,5 +1,5 @@
 <div *ngFor="let key of keys | async">
-  <app-theme-field [key]="key" [keys]="keys | async" [value]="theme[key].value" (onChange)="onChange($event)"></app-theme-field>
+  <app-theme-field [key]="key" [value]="theme[key].value" (onChange)="onChange($event)"></app-theme-field>
 </div>
 <div>
   <input [(ngModel)]="newKey" />
