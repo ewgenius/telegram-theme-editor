@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output } from '@angular/core';
+import { ThemeService, TelegramTheme } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent {
+  @Output() onApply;
+  theme: TelegramTheme;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private themeService: ThemeService) {
+    this.theme = this.themeService.theme;
   }
-
 }
