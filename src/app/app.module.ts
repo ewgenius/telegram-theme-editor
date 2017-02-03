@@ -1,30 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { reducer } from './reducers';
 import { TelegramModule } from './telegram/telegram.module';
-import { ThemeService } from './services/theme/theme.service';
 
 import { AppComponent } from './components/app/app.component';
 import { EditorComponent } from './components/editor/editor.component';
+import { ThemeEditorComponent } from './components/theme-editor/theme-editor.component';
+import { ThemeFieldComponent } from './components/theme-field/theme-field.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EditorComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    FlexLayoutModule,
-    TelegramModule
+    FlexLayoutModule.forRoot(),
+    TelegramModule,
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
-  providers: [
-    ThemeService
+  declarations: [
+    AppComponent,
+    EditorComponent,
+    ThemeEditorComponent,
+    ThemeFieldComponent
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

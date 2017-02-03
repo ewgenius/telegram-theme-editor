@@ -1,0 +1,8 @@
+<div *ngFor="let key of keys">
+  <app-theme-field [key]="key" [value]="theme[key].value" (onChange)="onChange($event)"></app-theme-field>
+</div>
+<div>
+  <input [(ngModel)]="newKey"/>
+  <input [(ngModel)]="newValue"/>
+  <button (click)="addProperty()">add</button>
+</div>

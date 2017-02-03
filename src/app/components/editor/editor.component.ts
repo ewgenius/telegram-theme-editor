@@ -1,5 +1,8 @@
 import { Component, Output } from '@angular/core';
-import { ThemeService, TelegramTheme } from '../../services/theme/theme.service';
+import { TelegramTheme } from '../../lib/telegram-theme';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-editor',
@@ -8,9 +11,9 @@ import { ThemeService, TelegramTheme } from '../../services/theme/theme.service'
 })
 export class EditorComponent {
   @Output() onApply;
-  theme: TelegramTheme;
+  theme: Observable<TelegramTheme>;
 
-  constructor(private themeService: ThemeService) {
-    this.theme = this.themeService.theme;
+  constructor(private store: Store<fromRoot.State>) {
+    this.theme = this.store.select(fromRoot.getTheme);
   }
 }
