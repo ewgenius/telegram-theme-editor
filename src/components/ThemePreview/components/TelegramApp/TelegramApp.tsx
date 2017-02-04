@@ -2,6 +2,12 @@ import './TelegramApp.scss';
 import * as React from 'react';
 import { Component, CSSProperties } from 'react';
 import { TelegramTheme, getPropertyValue } from '../../../../lib/TelegramTheme';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import SearchIcon from 'material-ui/svg-icons/action/search';
+import { List, ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 
 export default class TelegramApp extends Component<{
   theme: TelegramTheme;
@@ -44,10 +50,55 @@ export default class TelegramApp extends Component<{
           </header>
         </div>
       </div>,
-      <div key='3' className='telegram-chats-list'>
-        <button onClick={this.toggleSidebar}></button>
+
+      <div key='3' className='telegram-chats-list' style={{
+        borderRight: '1px solid #e7e7e7'
+      }}>
+        <AppBar
+          zDepth={0}
+          onLeftIconButtonTouchTap={this.toggleSidebar}
+          style={{
+            backgroundColor: '#fff'
+          }}
+          titleStyle={{
+            fontSize: 16
+          }}
+          title={<input className='search' placeholder='Search' style={{
+            backgroundColor: '#f1f1f1'
+          }} />} />
+
+        <div className='scroller'>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(chat => <ListItem
+            key={chat}
+            leftAvatar={<Avatar size={46} style={{ top: 8 }} src={`https://robohash.org/${chat}.png?bgset=any`} />}
+            height={62}
+            innerDivStyle={{ paddingTop: 13, paddingBottom: 13 }}
+            primaryText='Firstname Lastname'
+            secondaryText='last message' />)}
+        </div>
       </div>,
-      <div key='4' className='telegram-chat-view'>chats view</div>
+      <div key='4' className='telegram-chat-view'>
+        <AppBar
+          showMenuIconButton={false}
+          zDepth={0}
+          style={{
+            backgroundColor: '#fff',
+            borderBottom: '1px solid #e7e7e7'
+          }}
+          title={<ListItem
+            innerDivStyle={{
+              padding: '9px 0'
+            }}
+            primaryText='Firstname Lastname'
+            secondaryText='Firstname Lastname'
+            rightIconButton={<IconButton style={{ marginTop: -9 }}>
+              <SearchIcon color='#a8a8a8' />
+            </IconButton>}
+          />}
+          iconElementRight={<IconButton>
+            <MoreVertIcon />
+          </IconButton>} />
+      </div>
       ];
     }
   }
