@@ -18,7 +18,7 @@ interface AppDispatchProps {
 
 interface AppProps extends AppOwnProps, AppStateProps, AppDispatchProps { }
 
-const mapStateToProps = (state, ownProps?): AppStateProps => ({
+const mapStateToProps = (state: State, ownProps?): AppStateProps => ({
   theme: state.theme,
   ...ownProps
 });
@@ -29,12 +29,6 @@ class App extends Component<AppProps, {}> {
   render() {
     return (
       <div className='App'>
-        <div className='App-header'>
-          <h2>Welcome to React</h2>
-        </div>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
