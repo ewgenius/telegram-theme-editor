@@ -1,14 +1,24 @@
-import './styles/index.css';
+import './styles/index.scss';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import { reducer } from './reducers';
 import App from './components/App/App';
 
-const store = createStore(reducer);
+injectTapEventPlugin();
+
+const store = createStore(reducer, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__());
+
+const theme = getMuiTheme({}, lightBaseTheme);
 
 render(<Provider store={store}>
-  <App />
+  <MuiThemeProvider muiTheme={theme}>
+    <App />
+  </MuiThemeProvider>
 </Provider>, document.getElementById('root'));

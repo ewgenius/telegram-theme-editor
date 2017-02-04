@@ -1,10 +1,13 @@
-import './App.css';
+import './App.scss';
 import * as React from 'react';
 import { Component, Props } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { TelegramTheme } from '../../lib/TelegramTheme';
+import { TelegramTheme, PropertyPayload, ThemeKey } from '../../lib/TelegramTheme';
+import { setPropertyAction } from '../../actions/theme';
 import { State } from '../../reducers';
+import ThemeEditor from '../ThemeEditor/ThemeEditor';
+import ThemePreview from '../ThemePreview/ThemePreview';
 
 interface AppOwnProps extends Props<App> { }
 
@@ -13,7 +16,7 @@ interface AppStateProps {
 }
 
 interface AppDispatchProps {
-  setProperty: () => any;
+  setProperty: (payload: PropertyPayload) => void;
 }
 
 interface AppProps extends AppOwnProps, AppStateProps, AppDispatchProps { }
@@ -23,14 +26,25 @@ const mapStateToProps = (state: State, ownProps?): AppStateProps => ({
   ...ownProps
 });
 const mapDispatchToProps = (dispatch: Dispatch<any>): AppDispatchProps => ({
-  setProperty: () => { }
+  setProperty: (payload: PropertyPayload) => {
+    dispatch(setPropertyAction(payload));
+  }
 });
 class App extends Component<AppProps, {}> {
+  setProperty = (key: ThemeKey, value: string, ref?: boolean) => {
+    this.props.setProperty({
+      key,
+      value,
+      ref
+    });
+  }
+
   render() {
-    return (
-      <div className='App'>
-      </div>
-    );
+    const {theme} = this.props;
+    return <div className='App'>
+      {false && <ThemeEditor theme={theme} onChangeProperty={this.setProperty} />}
+      <ThemePreview theme={theme} />
+    </div>;
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

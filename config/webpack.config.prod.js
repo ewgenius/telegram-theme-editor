@@ -118,7 +118,7 @@ module.exports = {
           /\.html$/,
           /\.(ts|tsx)$/,
           /\.(js|jsx)$/,
-          /\.css$/,
+          /\.(css|scss)$/,
           /\.json$/,
           /\.svg$/
         ],
@@ -139,6 +139,10 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
       },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css!sass?sourceMap')
+      }
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.

@@ -9,6 +9,13 @@ const initialState: State = dark;
 
 export const reducer = handleActions<State, any>({
   [SET_PROPERTY]: (state, action: Action<PropertyPayload>) => {
-    console.log(state, action.payload);
+    const {key, value, ref} = action.payload;
+    return {
+      ...state,
+      [key]: {
+        value,
+        ref
+      }
+    };
   }
 }, initialState);
