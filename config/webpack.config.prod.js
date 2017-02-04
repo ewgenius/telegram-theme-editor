@@ -80,24 +80,26 @@ module.exports = {
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx', ''],
+    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', ''],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
     }
   },
-  
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
-    preLoaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'eslint',
-        include: paths.appSrc
-      }
-    ],
+    preLoaders: [{
+      test: /\.(ts|tsx)$/,
+      loader: 'tslint',
+      include: paths.appSrc,
+    }, {
+      test: /\.(js|jsx)$/,
+      loader: 'eslint',
+      include: paths.appSrc
+    }],
     loaders: [
       // Default loader: load all assets that are not handled
       // by other loaders with the url loader.
@@ -114,6 +116,7 @@ module.exports = {
       {
         exclude: [
           /\.html$/,
+          /\.(ts|tsx)$/,
           /\.(js|jsx)$/,
           /\.css$/,
           /\.json$/,
@@ -125,12 +128,16 @@ module.exports = {
           name: 'static/media/[name].[hash:8].[ext]'
         }
       },
+      {
+        test: /\.(ts|tsx)$/,
+        include: paths.appSrc,
+        loader: 'ts'
+      },
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-        
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -165,9 +172,9 @@ module.exports = {
       }
     ]
   },
-  
+
   // We use PostCSS for autoprefixing only.
-  postcss: function() {
+  postcss: function () {
     return [
       autoprefixer({
         browsers: [
