@@ -1,8 +1,31 @@
 import './App.css';
 import * as React from 'react';
-import { Component } from 'react';
+import { Component, Props } from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { TelegramTheme } from '../../lib/TelegramTheme';
+import { State } from '../../reducers';
 
-export default class App extends Component<{}, {}> {
+interface AppOwnProps extends Props<App> { }
+
+interface AppStateProps {
+  theme: TelegramTheme;
+}
+
+interface AppDispatchProps {
+  setProperty: () => any;
+}
+
+interface AppProps extends AppOwnProps, AppStateProps, AppDispatchProps { }
+
+const mapStateToProps = (state, ownProps?): AppStateProps => ({
+  theme: state.theme,
+  ...ownProps
+});
+const mapDispatchToProps = (dispatch: Dispatch<any>): AppDispatchProps => ({
+  setProperty: () => { }
+});
+class App extends Component<AppProps, {}> {
   render() {
     return (
       <div className='App'>
@@ -16,3 +39,4 @@ export default class App extends Component<{}, {}> {
     );
   }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -6,6 +6,8 @@
     "@types/node": "^7.0.5",
     "@types/react": "^15.0.6",
     "@types/react-dom": "^0.14.22",
+    "@types/react-redux": "^4.4.36",
+    "@types/redux-actions": "^1.2.2",
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
     "babel-eslint": "7.1.1",
@@ -55,7 +57,10 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
