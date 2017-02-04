@@ -42,7 +42,7 @@ class App extends Component<AppProps, {}> {
   render() {
     const {theme} = this.props;
     return <div className='App'>
-      {false && <ThemeEditor theme={theme} onChangeProperty={this.setProperty} />}
+      <ThemeEditor theme={theme} onChangeProperty={this.setProperty} />
       <ThemePreview theme={theme} />
     </div>;
   }
