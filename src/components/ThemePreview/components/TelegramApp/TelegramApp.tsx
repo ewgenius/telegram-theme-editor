@@ -1,7 +1,7 @@
 import './TelegramApp.scss';
 import * as React from 'react';
-import { Component } from 'react';
-import { TelegramTheme } from '../../../../lib/TelegramTheme';
+import { Component, CSSProperties } from 'react';
+import { TelegramTheme, getPropertyValue } from '../../../../lib/TelegramTheme';
 
 export default class TelegramApp extends Component<{
   theme: TelegramTheme;
@@ -18,6 +18,11 @@ export default class TelegramApp extends Component<{
 
   renderContent() {
     const {showSidebar, welcome} = this.state;
+    const {theme} = this.props;
+    const sidebarStyle: CSSProperties = {
+      backgroundColor: getPropertyValue(theme, 'windowBg'),
+      color: getPropertyValue(theme, 'windowFg')
+    };
     if (welcome) {
       return <div className='telegram-welcome'>
         <header>header</header>
@@ -30,24 +35,31 @@ export default class TelegramApp extends Component<{
       </div>;
     } else {
       return [<div
+        key='1'
         className={`telegram-sidebar-container${showSidebar ? '' : ' hidden'}`}
         onClick={this.toggleSidebar}
       >
-        <div className='telegram-sidebar'>
-          sidebar
+        <div key='2' className='telegram-sidebar'>
+          <header>
+          </header>
         </div>
       </div>,
-      <div className='telegram-chats-list'>
+      <div key='3' className='telegram-chats-list'>
         <button onClick={this.toggleSidebar}></button>
       </div>,
-      <div className='telegram-chat-view'>chats view</div>
+      <div key='4' className='telegram-chat-view'>chats view</div>
       ];
     }
   }
 
   render() {
     const {showSidebar} = this.state;
-    return <div className='telegram-app'>
+    const {theme} = this.props;
+    const windowStyle: CSSProperties = {
+      backgroundColor: getPropertyValue(theme, 'windowBg'),
+      color: getPropertyValue(theme, 'windowFg')
+    };
+    return <div className='telegram-app' style={windowStyle}>
       {this.renderContent()}
     </div>;
   }

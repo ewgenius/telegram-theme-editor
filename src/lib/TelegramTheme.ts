@@ -1,8 +1,7 @@
-export const properties = [
+export const properties: ThemeKey[] = [
   'windowBg',
   'windowFg',
   'windowBgOver',
-  'nullWindowBgOver',
   'windowBgRipple',
   'windowFgOver',
   'windowSubTextFg',
@@ -61,21 +60,34 @@ export const properties = [
   'placeholderFgActive',
   'inputBorderFg',
   'filterInputBorderFg',
+  'filterInputInactiveBg',
   'checkboxFg',
   'sliderBgInactive',
   'sliderBgActive',
   'tooltipBg',
   'tooltipFg',
   'tooltipBorderFg',
-  'titleBg',
   'titleShadow',
+  'titleBg',
+  'titleBgActive',
+  'titleButtonBg',
   'titleButtonFg',
   'titleButtonBgOver',
   'titleButtonFgOver',
+  'titleButtonBgActive',
+  'titleButtonFgActive',
+  'titleButtonBgActiveOver',
+  'titleButtonFgActiveOver',
+  'titleButtonCloseBg',
+  'titleButtonCloseFg',
   'titleButtonCloseBgOver',
   'titleButtonCloseFgOver',
-  'titleFgActive',
+  'titleButtonCloseBgActive',
+  'titleButtonCloseFgActive',
+  'titleButtonCloseBgActiveOver',
+  'titleButtonCloseFgActiveOver',
   'titleFg',
+  'titleFgActive',
   'trayCounterBg',
   'trayCounterBgMute',
   'trayCounterFg',
@@ -90,8 +102,6 @@ export const properties = [
   'boxTextFgError',
   'boxTitleFg',
   'boxSearchBg',
-  'boxSearchCancelIconFg',
-  'boxSearchCancelIconFgOver',
   'boxTitleAdditionalFg',
   'boxTitleCloseFg',
   'boxTitleCloseFgOver',
@@ -162,7 +172,6 @@ export const properties = [
   'dialogsForwardBg',
   'dialogsForwardFg',
   'searchedBarBg',
-  'searchedBarBorder',
   'searchedBarFg',
   'topBarBg',
   'emojiPanBg',
@@ -184,9 +193,6 @@ export const properties = [
   'historySendingOutIconFg',
   'historySendingInIconFg',
   'historySendingInvertedIconFg',
-  'historySystemBg',
-  'historySystemBgSelected',
-  'historySystemFg',
   'historyUnreadBarBg',
   'historyUnreadBarBorder',
   'historyUnreadBarFg',
@@ -271,6 +277,18 @@ export const properties = [
   'msgFile4BgDark',
   'msgFile4BgOver',
   'msgFile4BgSelected',
+  'historyFileInIconFg',
+  'historyFileInIconFgSelected',
+  'historyFileInRadialFg',
+  'historyFileInRadialFgSelected',
+  'historyFileOutIconFg',
+  'historyFileOutIconFgSelected',
+  'historyFileOutRadialFg',
+  'historyFileOutRadialFgSelected',
+  'historyFileThumbIconFg',
+  'historyFileThumbIconFgSelected',
+  'historyFileThumbRadialFg',
+  'historyFileThumbRadialFgSelected',
   'msgWaveformInActive',
   'msgWaveformInActiveSelected',
   'msgWaveformInInactive',
@@ -294,6 +312,11 @@ export const properties = [
   'toastFg',
   'reportSpamBg',
   'reportSpamFg',
+  'historyToDownBg',
+  'historyToDownBgOver',
+  'historyToDownBgRipple',
+  'historyToDownFg',
+  'historyToDownFgOver',
   'historyToDownShadow',
   'historyComposeAreaBg',
   'historyComposeAreaFg',
@@ -304,6 +327,7 @@ export const properties = [
   'historySendIconFgOver',
   'historyPinnedBg',
   'historyReplyBg',
+  'historyReplyIconFg',
   'historyReplyCancelFg',
   'historyReplyCancelFgOver',
   'historyComposeButtonBg',
@@ -314,6 +338,9 @@ export const properties = [
   'overviewCheckFgActive',
   'overviewPhotoSelectOverlay',
   'profileStatusFgOver',
+  'profileVerifiedCheckBg',
+  'profileVerifiedCheckFg',
+  'profileAdminStartFg',
   'notificationsBoxMonitorFg',
   'notificationsBoxScreenBg',
   'notificationSampleUserpicFg',
@@ -357,383 +384,410 @@ export const properties = [
   'mediaviewPlaybackIconFgOver',
   'mediaviewTransparentBg',
   'mediaviewTransparentFg',
-  'notificationBg'
+  'notificationBg',
 ];
 
-export function getPropertyValue(theme: TelegramTheme, key: string) {
+export function getPropertyValue(theme: TelegramTheme, key: ThemeKey) {
   const property = theme[key];
   if (property) {
-    return property.ref ? getPropertyValue(theme, property.value) : property.value;
+    return property.ref ? getPropertyValue(theme, property.value as ThemeKey) : property.value;
   } else {
     return null;
   }
 }
 
 export interface TelegramThemeProperty {
-  value: string;
+  value: string | ThemeKey;
   ref?: boolean;
 }
 
 export interface BaseTheme {
-  windowBg: TelegramThemeProperty;
-  windowFg: TelegramThemeProperty;
-  windowBgOver: TelegramThemeProperty;
-  nullWindowBgOver: TelegramThemeProperty;
-  windowBgRipple: TelegramThemeProperty;
-  windowFgOver: TelegramThemeProperty;
-  windowSubTextFg: TelegramThemeProperty;
-  windowSubTextFgOver: TelegramThemeProperty;
-  windowBoldFg: TelegramThemeProperty;
-  windowBoldFgOver: TelegramThemeProperty;
-  windowBgActive: TelegramThemeProperty;
-  windowFgActive: TelegramThemeProperty;
-  windowActiveTextFg: TelegramThemeProperty;
-  windowShadowFg: TelegramThemeProperty;
-  windowShadowFgFallback: TelegramThemeProperty;
-  shadowFg: TelegramThemeProperty;
-  slideFadeOutBg: TelegramThemeProperty;
-  slideFadeOutShadowFg: TelegramThemeProperty;
-  imageBg: TelegramThemeProperty;
-  imageBgTransparent: TelegramThemeProperty;
-  activeButtonBg: TelegramThemeProperty;
-  activeButtonBgOver: TelegramThemeProperty;
-  activeButtonBgRipple: TelegramThemeProperty;
-  activeButtonFg: TelegramThemeProperty;
-  activeButtonFgOver: TelegramThemeProperty;
-  activeButtonSecondaryFg: TelegramThemeProperty;
-  activeButtonSecondaryFgOver: TelegramThemeProperty;
-  activeLineFg: TelegramThemeProperty;
-  activeLineFgError: TelegramThemeProperty;
-  lightButtonBg: TelegramThemeProperty;
-  lightButtonBgOver: TelegramThemeProperty;
-  lightButtonBgRipple: TelegramThemeProperty;
-  lightButtonFg: TelegramThemeProperty;
-  lightButtonFgOver: TelegramThemeProperty;
-  attentionButtonFg: TelegramThemeProperty;
-  attentionButtonFgOver: TelegramThemeProperty;
-  attentionButtonBgOver: TelegramThemeProperty;
-  attentionButtonBgRipple: TelegramThemeProperty;
-  outlineButtonBg: TelegramThemeProperty;
-  outlineButtonBgOver: TelegramThemeProperty;
-  outlineButtonOutlineFg: TelegramThemeProperty;
-  outlineButtonBgRipple: TelegramThemeProperty;
-  menuBg: TelegramThemeProperty;
-  menuBgOver: TelegramThemeProperty;
-  menuBgRipple: TelegramThemeProperty;
-  menuIconFg: TelegramThemeProperty;
-  menuIconFgOver: TelegramThemeProperty;
-  menuSubmenuArrowFg: TelegramThemeProperty;
-  menuFgDisabled: TelegramThemeProperty;
-  menuSeparatorFg: TelegramThemeProperty;
-  scrollBarBg: TelegramThemeProperty;
-  scrollBarBgOver: TelegramThemeProperty;
-  scrollBg: TelegramThemeProperty;
-  scrollBgOver: TelegramThemeProperty;
-  smallCloseIconFg: TelegramThemeProperty;
-  smallCloseIconFgOver: TelegramThemeProperty;
-  radialFg: TelegramThemeProperty;
-  radialBg: TelegramThemeProperty;
-  placeholderFg: TelegramThemeProperty;
-  placeholderFgActive: TelegramThemeProperty;
-  inputBorderFg: TelegramThemeProperty;
-  filterInputBorderFg: TelegramThemeProperty;
-  checkboxFg: TelegramThemeProperty;
-  sliderBgInactive: TelegramThemeProperty;
-  sliderBgActive: TelegramThemeProperty;
-  tooltipBg: TelegramThemeProperty;
-  tooltipFg: TelegramThemeProperty;
-  tooltipBorderFg: TelegramThemeProperty;
-  titleBg: TelegramThemeProperty;
-  titleShadow: TelegramThemeProperty;
-  titleButtonFg: TelegramThemeProperty;
-  titleButtonBgOver: TelegramThemeProperty;
-  titleButtonFgOver: TelegramThemeProperty;
-  titleButtonCloseBgOver: TelegramThemeProperty;
-  titleButtonCloseFgOver: TelegramThemeProperty;
-  titleFgActive: TelegramThemeProperty;
-  titleFg: TelegramThemeProperty;
-  trayCounterBg: TelegramThemeProperty;
-  trayCounterBgMute: TelegramThemeProperty;
-  trayCounterFg: TelegramThemeProperty;
-  trayCounterBgMacInvert: TelegramThemeProperty;
-  trayCounterFgMacInvert: TelegramThemeProperty;
-  layerBg: TelegramThemeProperty;
-  cancelIconFg: TelegramThemeProperty;
-  cancelIconFgOver: TelegramThemeProperty;
-  boxBg: TelegramThemeProperty;
-  boxTextFg: TelegramThemeProperty;
-  boxTextFgGood: TelegramThemeProperty;
-  boxTextFgError: TelegramThemeProperty;
-  boxTitleFg: TelegramThemeProperty;
-  boxSearchBg: TelegramThemeProperty;
-  boxSearchCancelIconFg: TelegramThemeProperty;
-  boxSearchCancelIconFgOver: TelegramThemeProperty;
-  boxTitleAdditionalFg: TelegramThemeProperty;
-  boxTitleCloseFg: TelegramThemeProperty;
-  boxTitleCloseFgOver: TelegramThemeProperty;
-  membersAboutLimitFg: TelegramThemeProperty;
-  contactsBg: TelegramThemeProperty;
-  contactsBgOver: TelegramThemeProperty;
-  contactsNameFg: TelegramThemeProperty;
-  contactsStatusFg: TelegramThemeProperty;
-  contactsStatusFgOver: TelegramThemeProperty;
-  contactsStatusFgOnline: TelegramThemeProperty;
-  photoCropFadeBg: TelegramThemeProperty;
-  photoCropPointFg: TelegramThemeProperty;
-  introBg: TelegramThemeProperty;
-  introTitleFg: TelegramThemeProperty;
-  introDescriptionFg: TelegramThemeProperty;
-  introErrorFg: TelegramThemeProperty;
-  introCoverTopBg: TelegramThemeProperty;
-  introCoverBottomBg: TelegramThemeProperty;
-  introCoverIconsFg: TelegramThemeProperty;
-  introCoverPlaneTrace: TelegramThemeProperty;
-  introCoverPlaneInner: TelegramThemeProperty;
-  introCoverPlaneOuter: TelegramThemeProperty;
-  introCoverPlaneTop: TelegramThemeProperty;
-  dialogsMenuIconFg: TelegramThemeProperty;
-  dialogsMenuIconFgOver: TelegramThemeProperty;
-  dialogsBg: TelegramThemeProperty;
-  dialogsNameFg: TelegramThemeProperty;
-  dialogsChatIconFg: TelegramThemeProperty;
-  dialogsDateFg: TelegramThemeProperty;
-  dialogsTextFg: TelegramThemeProperty;
-  dialogsTextFgService: TelegramThemeProperty;
-  dialogsDraftFg: TelegramThemeProperty;
-  dialogsVerifiedIconBg: TelegramThemeProperty;
-  dialogsVerifiedIconFg: TelegramThemeProperty;
-  dialogsSendingIconFg: TelegramThemeProperty;
-  dialogsSentIconFg: TelegramThemeProperty;
-  dialogsUnreadBg: TelegramThemeProperty;
-  dialogsUnreadBgMuted: TelegramThemeProperty;
-  dialogsUnreadFg: TelegramThemeProperty;
-  dialogsBgOver: TelegramThemeProperty;
-  dialogsNameFgOver: TelegramThemeProperty;
-  dialogsChatIconFgOver: TelegramThemeProperty;
-  dialogsDateFgOver: TelegramThemeProperty;
-  dialogsTextFgOver: TelegramThemeProperty;
-  dialogsTextFgServiceOver: TelegramThemeProperty;
-  dialogsDraftFgOver: TelegramThemeProperty;
-  dialogsVerifiedIconBgOver: TelegramThemeProperty;
-  dialogsVerifiedIconFgOver: TelegramThemeProperty;
-  dialogsSendingIconFgOver: TelegramThemeProperty;
-  dialogsSentIconFgOver: TelegramThemeProperty;
-  dialogsUnreadBgOver: TelegramThemeProperty;
-  dialogsUnreadBgMutedOver: TelegramThemeProperty;
-  dialogsUnreadFgOver: TelegramThemeProperty;
-  dialogsBgActive: TelegramThemeProperty;
-  dialogsNameFgActive: TelegramThemeProperty;
-  dialogsChatIconFgActive: TelegramThemeProperty;
-  dialogsDateFgActive: TelegramThemeProperty;
-  dialogsTextFgActive: TelegramThemeProperty;
-  dialogsTextFgServiceActive: TelegramThemeProperty;
-  dialogsDraftFgActive: TelegramThemeProperty;
-  dialogsVerifiedIconBgActive: TelegramThemeProperty;
-  dialogsVerifiedIconFgActive: TelegramThemeProperty;
-  dialogsSendingIconFgActive: TelegramThemeProperty;
-  dialogsSentIconFgActive: TelegramThemeProperty;
-  dialogsUnreadBgActive: TelegramThemeProperty;
-  dialogsUnreadBgMutedActive: TelegramThemeProperty;
-  dialogsUnreadFgActive: TelegramThemeProperty;
-  dialogsForwardBg: TelegramThemeProperty;
-  dialogsForwardFg: TelegramThemeProperty;
-  searchedBarBg: TelegramThemeProperty;
-  searchedBarBorder: TelegramThemeProperty;
-  searchedBarFg: TelegramThemeProperty;
-  topBarBg: TelegramThemeProperty;
-  emojiPanBg: TelegramThemeProperty;
-  emojiPanCategories: TelegramThemeProperty;
-  emojiPanHeaderFg: TelegramThemeProperty;
-  emojiPanHeaderBg: TelegramThemeProperty;
-  stickerPanDeleteBg: TelegramThemeProperty;
-  stickerPanDeleteFg: TelegramThemeProperty;
-  stickerPreviewBg: TelegramThemeProperty;
-  historyTextInFg: TelegramThemeProperty;
-  historyTextOutFg: TelegramThemeProperty;
-  historyCaptionInFg: TelegramThemeProperty;
-  historyCaptionOutFg: TelegramThemeProperty;
-  historyFileNameInFg: TelegramThemeProperty;
-  historyFileNameOutFg: TelegramThemeProperty;
-  historyOutIconFg: TelegramThemeProperty;
-  historyOutIconFgSelected: TelegramThemeProperty;
-  historyIconFgInverted: TelegramThemeProperty;
-  historySendingOutIconFg: TelegramThemeProperty;
-  historySendingInIconFg: TelegramThemeProperty;
-  historySendingInvertedIconFg: TelegramThemeProperty;
-  historySystemBg: TelegramThemeProperty;
-  historySystemBgSelected: TelegramThemeProperty;
-  historySystemFg: TelegramThemeProperty;
-  historyUnreadBarBg: TelegramThemeProperty;
-  historyUnreadBarBorder: TelegramThemeProperty;
-  historyUnreadBarFg: TelegramThemeProperty;
-  historyForwardChooseBg: TelegramThemeProperty;
-  historyForwardChooseFg: TelegramThemeProperty;
-  historyPeer1NameFg: TelegramThemeProperty;
-  historyPeer1UserpicBg: TelegramThemeProperty;
-  historyPeer2NameFg: TelegramThemeProperty;
-  historyPeer2UserpicBg: TelegramThemeProperty;
-  historyPeer3NameFg: TelegramThemeProperty;
-  historyPeer3UserpicBg: TelegramThemeProperty;
-  historyPeer4NameFg: TelegramThemeProperty;
-  historyPeer4UserpicBg: TelegramThemeProperty;
-  historyPeer5NameFg: TelegramThemeProperty;
-  historyPeer5UserpicBg: TelegramThemeProperty;
-  historyPeer6NameFg: TelegramThemeProperty;
-  historyPeer6UserpicBg: TelegramThemeProperty;
-  historyPeer7NameFg: TelegramThemeProperty;
-  historyPeer7UserpicBg: TelegramThemeProperty;
-  historyPeer8NameFg: TelegramThemeProperty;
-  historyPeer8UserpicBg: TelegramThemeProperty;
-  historyPeerUserpicFg: TelegramThemeProperty;
-  historyScrollBarBg: TelegramThemeProperty;
-  historyScrollBarBgOver: TelegramThemeProperty;
-  historyScrollBg: TelegramThemeProperty;
-  historyScrollBgOver: TelegramThemeProperty;
-  msgInBg: TelegramThemeProperty;
-  msgInBgSelected: TelegramThemeProperty;
-  msgOutBg: TelegramThemeProperty;
-  msgOutBgSelected: TelegramThemeProperty;
-  msgSelectOverlay: TelegramThemeProperty;
-  msgStickerOverlay: TelegramThemeProperty;
-  msgInServiceFg: TelegramThemeProperty;
-  msgInServiceFgSelected: TelegramThemeProperty;
-  msgOutServiceFg: TelegramThemeProperty;
-  msgOutServiceFgSelected: TelegramThemeProperty;
-  msgInShadow: TelegramThemeProperty;
-  msgInShadowSelected: TelegramThemeProperty;
-  msgOutShadow: TelegramThemeProperty;
-  msgOutShadowSelected: TelegramThemeProperty;
-  msgInDateFg: TelegramThemeProperty;
-  msgInDateFgSelected: TelegramThemeProperty;
-  msgOutDateFg: TelegramThemeProperty;
-  msgOutDateFgSelected: TelegramThemeProperty;
-  msgServiceFg: TelegramThemeProperty;
-  msgServiceBg: TelegramThemeProperty;
-  msgServiceBgSelected: TelegramThemeProperty;
-  msgInReplyBarColor: TelegramThemeProperty;
-  msgInReplyBarSelColor: TelegramThemeProperty;
-  msgOutReplyBarColor: TelegramThemeProperty;
-  msgOutReplyBarSelColor: TelegramThemeProperty;
-  msgImgReplyBarColor: TelegramThemeProperty;
-  msgInMonoFg: TelegramThemeProperty;
-  msgOutMonoFg: TelegramThemeProperty;
-  msgDateImgFg: TelegramThemeProperty;
-  msgDateImgBg: TelegramThemeProperty;
-  msgDateImgBgOver: TelegramThemeProperty;
-  msgDateImgBgSelected: TelegramThemeProperty;
-  msgFileThumbLinkInFg: TelegramThemeProperty;
-  msgFileThumbLinkInFgSelected: TelegramThemeProperty;
-  msgFileThumbLinkOutFg: TelegramThemeProperty;
-  msgFileThumbLinkOutFgSelected: TelegramThemeProperty;
-  msgFileInBg: TelegramThemeProperty;
-  msgFileInBgOver: TelegramThemeProperty;
-  msgFileInBgSelected: TelegramThemeProperty;
-  msgFileOutBg: TelegramThemeProperty;
-  msgFileOutBgOver: TelegramThemeProperty;
-  msgFileOutBgSelected: TelegramThemeProperty;
-  msgFile1Bg: TelegramThemeProperty;
-  msgFile1BgDark: TelegramThemeProperty;
-  msgFile1BgOver: TelegramThemeProperty;
-  msgFile1BgSelected: TelegramThemeProperty;
-  msgFile2Bg: TelegramThemeProperty;
-  msgFile2BgDark: TelegramThemeProperty;
-  msgFile2BgOver: TelegramThemeProperty;
-  msgFile2BgSelected: TelegramThemeProperty;
-  msgFile3Bg: TelegramThemeProperty;
-  msgFile3BgDark: TelegramThemeProperty;
-  msgFile3BgOver: TelegramThemeProperty;
-  msgFile3BgSelected: TelegramThemeProperty;
-  msgFile4Bg: TelegramThemeProperty;
-  msgFile4BgDark: TelegramThemeProperty;
-  msgFile4BgOver: TelegramThemeProperty;
-  msgFile4BgSelected: TelegramThemeProperty;
-  msgWaveformInActive: TelegramThemeProperty;
-  msgWaveformInActiveSelected: TelegramThemeProperty;
-  msgWaveformInInactive: TelegramThemeProperty;
-  msgWaveformInInactiveSelected: TelegramThemeProperty;
-  msgWaveformOutActive: TelegramThemeProperty;
-  msgWaveformOutActiveSelected: TelegramThemeProperty;
-  msgWaveformOutInactive: TelegramThemeProperty;
-  msgWaveformOutInactiveSelected: TelegramThemeProperty;
-  msgBotKbOverBgAdd: TelegramThemeProperty;
-  msgBotKbIconFg: TelegramThemeProperty;
-  msgBotKbRippleBg: TelegramThemeProperty;
-  mediaInFg: TelegramThemeProperty;
-  mediaInFgSelected: TelegramThemeProperty;
-  mediaOutFg: TelegramThemeProperty;
-  mediaOutFgSelected: TelegramThemeProperty;
-  youtubePlayIconBg: TelegramThemeProperty;
-  youtubePlayIconFg: TelegramThemeProperty;
-  videoPlayIconBg: TelegramThemeProperty;
-  videoPlayIconFg: TelegramThemeProperty;
-  toastBg: TelegramThemeProperty;
-  toastFg: TelegramThemeProperty;
-  reportSpamBg: TelegramThemeProperty;
-  reportSpamFg: TelegramThemeProperty;
-  historyToDownShadow: TelegramThemeProperty;
-  historyComposeAreaBg: TelegramThemeProperty;
-  historyComposeAreaFg: TelegramThemeProperty;
-  historyComposeAreaFgService: TelegramThemeProperty;
-  historyComposeIconFg: TelegramThemeProperty;
-  historyComposeIconFgOver: TelegramThemeProperty;
-  historySendIconFg: TelegramThemeProperty;
-  historySendIconFgOver: TelegramThemeProperty;
-  historyPinnedBg: TelegramThemeProperty;
-  historyReplyBg: TelegramThemeProperty;
-  historyReplyCancelFg: TelegramThemeProperty;
-  historyReplyCancelFgOver: TelegramThemeProperty;
-  historyComposeButtonBg: TelegramThemeProperty;
-  historyComposeButtonBgOver: TelegramThemeProperty;
-  historyComposeButtonBgRipple: TelegramThemeProperty;
-  overviewCheckBg: TelegramThemeProperty;
-  overviewCheckFg: TelegramThemeProperty;
-  overviewCheckFgActive: TelegramThemeProperty;
-  overviewPhotoSelectOverlay: TelegramThemeProperty;
-  profileStatusFgOver: TelegramThemeProperty;
-  notificationsBoxMonitorFg: TelegramThemeProperty;
-  notificationsBoxScreenBg: TelegramThemeProperty;
-  notificationSampleUserpicFg: TelegramThemeProperty;
-  notificationSampleCloseFg: TelegramThemeProperty;
-  notificationSampleTextFg: TelegramThemeProperty;
-  notificationSampleNameFg: TelegramThemeProperty;
-  mainMenuBg: TelegramThemeProperty;
-  mainMenuCoverBg: TelegramThemeProperty;
-  mainMenuCoverFg: TelegramThemeProperty;
-  mediaPlayerBg: TelegramThemeProperty;
-  mediaPlayerActiveFg: TelegramThemeProperty;
-  mediaPlayerInactiveFg: TelegramThemeProperty;
-  mediaPlayerDisabledFg: TelegramThemeProperty;
-  mediaviewFileBg: TelegramThemeProperty;
-  mediaviewFileNameFg: TelegramThemeProperty;
-  mediaviewFileSizeFg: TelegramThemeProperty;
-  mediaviewFileRedCornerFg: TelegramThemeProperty;
-  mediaviewFileYellowCornerFg: TelegramThemeProperty;
-  mediaviewFileGreenCornerFg: TelegramThemeProperty;
-  mediaviewFileBlueCornerFg: TelegramThemeProperty;
-  mediaviewFileExtFg: TelegramThemeProperty;
-  mediaviewMenuBg: TelegramThemeProperty;
-  mediaviewMenuBgOver: TelegramThemeProperty;
-  mediaviewMenuBgRipple: TelegramThemeProperty;
-  mediaviewMenuFg: TelegramThemeProperty;
-  mediaviewBg: TelegramThemeProperty;
-  mediaviewVideoBg: TelegramThemeProperty;
-  mediaviewControlBg: TelegramThemeProperty;
-  mediaviewControlFg: TelegramThemeProperty;
-  mediaviewCaptionBg: TelegramThemeProperty;
-  mediaviewCaptionFg: TelegramThemeProperty;
-  mediaviewTextLinkFg: TelegramThemeProperty;
-  mediaviewSaveMsgBg: TelegramThemeProperty;
-  mediaviewSaveMsgFg: TelegramThemeProperty;
-  mediaviewPlaybackActive: TelegramThemeProperty;
-  mediaviewPlaybackInactive: TelegramThemeProperty;
-  mediaviewPlaybackActiveOver: TelegramThemeProperty;
-  mediaviewPlaybackInactiveOver: TelegramThemeProperty;
-  mediaviewPlaybackProgressFg: TelegramThemeProperty;
-  mediaviewPlaybackIconFg: TelegramThemeProperty;
-  mediaviewPlaybackIconFgOver: TelegramThemeProperty;
-  mediaviewTransparentBg: TelegramThemeProperty;
-  mediaviewTransparentFg: TelegramThemeProperty;
-  notificationBg: TelegramThemeProperty;
+  windowBg?: TelegramThemeProperty;
+  windowFg?: TelegramThemeProperty;
+  windowBgOver?: TelegramThemeProperty;
+  windowBgRipple?: TelegramThemeProperty;
+  windowFgOver?: TelegramThemeProperty;
+  windowSubTextFg?: TelegramThemeProperty;
+  windowSubTextFgOver?: TelegramThemeProperty;
+  windowBoldFg?: TelegramThemeProperty;
+  windowBoldFgOver?: TelegramThemeProperty;
+  windowBgActive?: TelegramThemeProperty;
+  windowFgActive?: TelegramThemeProperty;
+  windowActiveTextFg?: TelegramThemeProperty;
+  windowShadowFg?: TelegramThemeProperty;
+  windowShadowFgFallback?: TelegramThemeProperty;
+  shadowFg?: TelegramThemeProperty;
+  slideFadeOutBg?: TelegramThemeProperty;
+  slideFadeOutShadowFg?: TelegramThemeProperty;
+  imageBg?: TelegramThemeProperty;
+  imageBgTransparent?: TelegramThemeProperty;
+  activeButtonBg?: TelegramThemeProperty;
+  activeButtonBgOver?: TelegramThemeProperty;
+  activeButtonBgRipple?: TelegramThemeProperty;
+  activeButtonFg?: TelegramThemeProperty;
+  activeButtonFgOver?: TelegramThemeProperty;
+  activeButtonSecondaryFg?: TelegramThemeProperty;
+  activeButtonSecondaryFgOver?: TelegramThemeProperty;
+  activeLineFg?: TelegramThemeProperty;
+  activeLineFgError?: TelegramThemeProperty;
+  lightButtonBg?: TelegramThemeProperty;
+  lightButtonBgOver?: TelegramThemeProperty;
+  lightButtonBgRipple?: TelegramThemeProperty;
+  lightButtonFg?: TelegramThemeProperty;
+  lightButtonFgOver?: TelegramThemeProperty;
+  attentionButtonFg?: TelegramThemeProperty;
+  attentionButtonFgOver?: TelegramThemeProperty;
+  attentionButtonBgOver?: TelegramThemeProperty;
+  attentionButtonBgRipple?: TelegramThemeProperty;
+  outlineButtonBg?: TelegramThemeProperty;
+  outlineButtonBgOver?: TelegramThemeProperty;
+  outlineButtonOutlineFg?: TelegramThemeProperty;
+  outlineButtonBgRipple?: TelegramThemeProperty;
+  menuBg?: TelegramThemeProperty;
+  menuBgOver?: TelegramThemeProperty;
+  menuBgRipple?: TelegramThemeProperty;
+  menuIconFg?: TelegramThemeProperty;
+  menuIconFgOver?: TelegramThemeProperty;
+  menuSubmenuArrowFg?: TelegramThemeProperty;
+  menuFgDisabled?: TelegramThemeProperty;
+  menuSeparatorFg?: TelegramThemeProperty;
+  scrollBarBg?: TelegramThemeProperty;
+  scrollBarBgOver?: TelegramThemeProperty;
+  scrollBg?: TelegramThemeProperty;
+  scrollBgOver?: TelegramThemeProperty;
+  smallCloseIconFg?: TelegramThemeProperty;
+  smallCloseIconFgOver?: TelegramThemeProperty;
+  radialFg?: TelegramThemeProperty;
+  radialBg?: TelegramThemeProperty;
+  placeholderFg?: TelegramThemeProperty;
+  placeholderFgActive?: TelegramThemeProperty;
+  inputBorderFg?: TelegramThemeProperty;
+  filterInputBorderFg?: TelegramThemeProperty;
+  filterInputInactiveBg?: TelegramThemeProperty;
+  checkboxFg?: TelegramThemeProperty;
+  sliderBgInactive?: TelegramThemeProperty;
+  sliderBgActive?: TelegramThemeProperty;
+  tooltipBg?: TelegramThemeProperty;
+  tooltipFg?: TelegramThemeProperty;
+  tooltipBorderFg?: TelegramThemeProperty;
+  titleShadow?: TelegramThemeProperty;
+  titleBg?: TelegramThemeProperty;
+  titleBgActive?: TelegramThemeProperty;
+  titleButtonBg?: TelegramThemeProperty;
+  titleButtonFg?: TelegramThemeProperty;
+  titleButtonBgOver?: TelegramThemeProperty;
+  titleButtonFgOver?: TelegramThemeProperty;
+  titleButtonBgActive?: TelegramThemeProperty;
+  titleButtonFgActive?: TelegramThemeProperty;
+  titleButtonBgActiveOver?: TelegramThemeProperty;
+  titleButtonFgActiveOver?: TelegramThemeProperty;
+  titleButtonCloseBg?: TelegramThemeProperty;
+  titleButtonCloseFg?: TelegramThemeProperty;
+  titleButtonCloseBgOver?: TelegramThemeProperty;
+  titleButtonCloseFgOver?: TelegramThemeProperty;
+  titleButtonCloseBgActive?: TelegramThemeProperty;
+  titleButtonCloseFgActive?: TelegramThemeProperty;
+  titleButtonCloseBgActiveOver?: TelegramThemeProperty;
+  titleButtonCloseFgActiveOver?: TelegramThemeProperty;
+  titleFg?: TelegramThemeProperty;
+  titleFgActive?: TelegramThemeProperty;
+  trayCounterBg?: TelegramThemeProperty;
+  trayCounterBgMute?: TelegramThemeProperty;
+  trayCounterFg?: TelegramThemeProperty;
+  trayCounterBgMacInvert?: TelegramThemeProperty;
+  trayCounterFgMacInvert?: TelegramThemeProperty;
+  layerBg?: TelegramThemeProperty;
+  cancelIconFg?: TelegramThemeProperty;
+  cancelIconFgOver?: TelegramThemeProperty;
+  boxBg?;
+  boxTextFg?: TelegramThemeProperty;
+  boxTextFgGood?: TelegramThemeProperty;
+  boxTextFgError?: TelegramThemeProperty;
+  boxTitleFg?: TelegramThemeProperty;
+  boxSearchBg?: TelegramThemeProperty;
+  boxTitleAdditionalFg?: TelegramThemeProperty;
+  boxTitleCloseFg?: TelegramThemeProperty;
+  boxTitleCloseFgOver?: TelegramThemeProperty;
+  membersAboutLimitFg?: TelegramThemeProperty;
+  contactsBg?: TelegramThemeProperty;
+  contactsBgOver?: TelegramThemeProperty;
+  contactsNameFg?: TelegramThemeProperty;
+  contactsStatusFg?: TelegramThemeProperty;
+  contactsStatusFgOver?: TelegramThemeProperty;
+  contactsStatusFgOnline?: TelegramThemeProperty;
+  photoCropFadeBg?: TelegramThemeProperty;
+  photoCropPointFg?: TelegramThemeProperty;
+  introBg?: TelegramThemeProperty;
+  introTitleFg?: TelegramThemeProperty;
+  introDescriptionFg?: TelegramThemeProperty;
+  introErrorFg?: TelegramThemeProperty;
+  introCoverTopBg?: TelegramThemeProperty;
+  introCoverBottomBg?: TelegramThemeProperty;
+  introCoverIconsFg?: TelegramThemeProperty;
+  introCoverPlaneTrace?: TelegramThemeProperty;
+  introCoverPlaneInner?: TelegramThemeProperty;
+  introCoverPlaneOuter?: TelegramThemeProperty;
+  introCoverPlaneTop?: TelegramThemeProperty;
+  dialogsMenuIconFg?: TelegramThemeProperty;
+  dialogsMenuIconFgOver?: TelegramThemeProperty;
+  dialogsBg?: TelegramThemeProperty;
+  dialogsNameFg?: TelegramThemeProperty;
+  dialogsChatIconFg?: TelegramThemeProperty;
+  dialogsDateFg?: TelegramThemeProperty;
+  dialogsTextFg?: TelegramThemeProperty;
+  dialogsTextFgService?: TelegramThemeProperty;
+  dialogsDraftFg?: TelegramThemeProperty;
+  dialogsVerifiedIconBg?: TelegramThemeProperty;
+  dialogsVerifiedIconFg?: TelegramThemeProperty;
+  dialogsSendingIconFg?: TelegramThemeProperty;
+  dialogsSentIconFg?: TelegramThemeProperty;
+  dialogsUnreadBg?: TelegramThemeProperty;
+  dialogsUnreadBgMuted?: TelegramThemeProperty;
+  dialogsUnreadFg?: TelegramThemeProperty;
+  dialogsBgOver?: TelegramThemeProperty;
+  dialogsNameFgOver?: TelegramThemeProperty;
+  dialogsChatIconFgOver?: TelegramThemeProperty;
+  dialogsDateFgOver?: TelegramThemeProperty;
+  dialogsTextFgOver?: TelegramThemeProperty;
+  dialogsTextFgServiceOver?: TelegramThemeProperty;
+  dialogsDraftFgOver?: TelegramThemeProperty;
+  dialogsVerifiedIconBgOver?: TelegramThemeProperty;
+  dialogsVerifiedIconFgOver?: TelegramThemeProperty;
+  dialogsSendingIconFgOver?: TelegramThemeProperty;
+  dialogsSentIconFgOver?: TelegramThemeProperty;
+  dialogsUnreadBgOver?: TelegramThemeProperty;
+  dialogsUnreadBgMutedOver?: TelegramThemeProperty;
+  dialogsUnreadFgOver?: TelegramThemeProperty;
+  dialogsBgActive?: TelegramThemeProperty;
+  dialogsNameFgActive?: TelegramThemeProperty;
+  dialogsChatIconFgActive?: TelegramThemeProperty;
+  dialogsDateFgActive?: TelegramThemeProperty;
+  dialogsTextFgActive?: TelegramThemeProperty;
+  dialogsTextFgServiceActive?: TelegramThemeProperty;
+  dialogsDraftFgActive?: TelegramThemeProperty;
+  dialogsVerifiedIconBgActive?: TelegramThemeProperty;
+  dialogsVerifiedIconFgActive?: TelegramThemeProperty;
+  dialogsSendingIconFgActive?: TelegramThemeProperty;
+  dialogsSentIconFgActive?: TelegramThemeProperty;
+  dialogsUnreadBgActive?: TelegramThemeProperty;
+  dialogsUnreadBgMutedActive?: TelegramThemeProperty;
+  dialogsUnreadFgActive?: TelegramThemeProperty;
+  dialogsForwardBg?: TelegramThemeProperty;
+  dialogsForwardFg?: TelegramThemeProperty;
+  searchedBarBg?: TelegramThemeProperty;
+  searchedBarFg?: TelegramThemeProperty;
+  topBarBg?: TelegramThemeProperty;
+  emojiPanBg?: TelegramThemeProperty;
+  emojiPanCategories?: TelegramThemeProperty;
+  emojiPanHeaderFg?: TelegramThemeProperty;
+  emojiPanHeaderBg?: TelegramThemeProperty;
+  stickerPanDeleteBg?: TelegramThemeProperty;
+  stickerPanDeleteFg?: TelegramThemeProperty;
+  stickerPreviewBg?: TelegramThemeProperty;
+  historyTextInFg?: TelegramThemeProperty;
+  historyTextOutFg?: TelegramThemeProperty;
+  historyCaptionInFg?: TelegramThemeProperty;
+  historyCaptionOutFg?: TelegramThemeProperty;
+  historyFileNameInFg?: TelegramThemeProperty;
+  historyFileNameOutFg?: TelegramThemeProperty;
+  historyOutIconFg?: TelegramThemeProperty;
+  historyOutIconFgSelected?: TelegramThemeProperty;
+  historyIconFgInverted?: TelegramThemeProperty;
+  historySendingOutIconFg?: TelegramThemeProperty;
+  historySendingInIconFg?: TelegramThemeProperty;
+  historySendingInvertedIconFg?: TelegramThemeProperty;
+  historyUnreadBarBg?: TelegramThemeProperty;
+  historyUnreadBarBorder?: TelegramThemeProperty;
+  historyUnreadBarFg?: TelegramThemeProperty;
+  historyForwardChooseBg?: TelegramThemeProperty;
+  historyForwardChooseFg?: TelegramThemeProperty;
+  historyPeer1NameFg?: TelegramThemeProperty;
+  historyPeer1UserpicBg?: TelegramThemeProperty;
+  historyPeer2NameFg?: TelegramThemeProperty;
+  historyPeer2UserpicBg?: TelegramThemeProperty;
+  historyPeer3NameFg?: TelegramThemeProperty;
+  historyPeer3UserpicBg?: TelegramThemeProperty;
+  historyPeer4NameFg?: TelegramThemeProperty;
+  historyPeer4UserpicBg?: TelegramThemeProperty;
+  historyPeer5NameFg?: TelegramThemeProperty;
+  historyPeer5UserpicBg?: TelegramThemeProperty;
+  historyPeer6NameFg?: TelegramThemeProperty;
+  historyPeer6UserpicBg?: TelegramThemeProperty;
+  historyPeer7NameFg?: TelegramThemeProperty;
+  historyPeer7UserpicBg?: TelegramThemeProperty;
+  historyPeer8NameFg?: TelegramThemeProperty;
+  historyPeer8UserpicBg?: TelegramThemeProperty;
+  historyPeerUserpicFg?: TelegramThemeProperty;
+  historyScrollBarBg?: TelegramThemeProperty;
+  historyScrollBarBgOver?: TelegramThemeProperty;
+  historyScrollBg?: TelegramThemeProperty;
+  historyScrollBgOver?: TelegramThemeProperty;
+  msgInBg?: TelegramThemeProperty;
+  msgInBgSelected?: TelegramThemeProperty;
+  msgOutBg?: TelegramThemeProperty;
+  msgOutBgSelected?: TelegramThemeProperty;
+  msgSelectOverlay?: TelegramThemeProperty;
+  msgStickerOverlay?: TelegramThemeProperty;
+  msgInServiceFg?: TelegramThemeProperty;
+  msgInServiceFgSelected?: TelegramThemeProperty;
+  msgOutServiceFg?: TelegramThemeProperty;
+  msgOutServiceFgSelected?: TelegramThemeProperty;
+  msgInShadow?: TelegramThemeProperty;
+  msgInShadowSelected?: TelegramThemeProperty;
+  msgOutShadow?: TelegramThemeProperty;
+  msgOutShadowSelected?: TelegramThemeProperty;
+  msgInDateFg?: TelegramThemeProperty;
+  msgInDateFgSelected?: TelegramThemeProperty;
+  msgOutDateFg?: TelegramThemeProperty;
+  msgOutDateFgSelected?: TelegramThemeProperty;
+  msgServiceFg?: TelegramThemeProperty;
+  msgServiceBg?: TelegramThemeProperty;
+  msgServiceBgSelected?: TelegramThemeProperty;
+  msgInReplyBarColor?: TelegramThemeProperty;
+  msgInReplyBarSelColor?: TelegramThemeProperty;
+  msgOutReplyBarColor?: TelegramThemeProperty;
+  msgOutReplyBarSelColor?: TelegramThemeProperty;
+  msgImgReplyBarColor?: TelegramThemeProperty;
+  msgInMonoFg?: TelegramThemeProperty;
+  msgOutMonoFg?: TelegramThemeProperty;
+  msgDateImgFg?: TelegramThemeProperty;
+  msgDateImgBg?: TelegramThemeProperty;
+  msgDateImgBgOver?: TelegramThemeProperty;
+  msgDateImgBgSelected?: TelegramThemeProperty;
+  msgFileThumbLinkInFg?: TelegramThemeProperty;
+  msgFileThumbLinkInFgSelected?: TelegramThemeProperty;
+  msgFileThumbLinkOutFg?: TelegramThemeProperty;
+  msgFileThumbLinkOutFgSelected?: TelegramThemeProperty;
+  msgFileInBg?: TelegramThemeProperty;
+  msgFileInBgOver?: TelegramThemeProperty;
+  msgFileInBgSelected?: TelegramThemeProperty;
+  msgFileOutBg?: TelegramThemeProperty;
+  msgFileOutBgOver?: TelegramThemeProperty;
+  msgFileOutBgSelected?: TelegramThemeProperty;
+  msgFile1Bg?: TelegramThemeProperty;
+  msgFile1BgDark?: TelegramThemeProperty;
+  msgFile1BgOver?: TelegramThemeProperty;
+  msgFile1BgSelected?: TelegramThemeProperty;
+  msgFile2Bg?: TelegramThemeProperty;
+  msgFile2BgDark?: TelegramThemeProperty;
+  msgFile2BgOver?: TelegramThemeProperty;
+  msgFile2BgSelected?: TelegramThemeProperty;
+  msgFile3Bg?: TelegramThemeProperty;
+  msgFile3BgDark?: TelegramThemeProperty;
+  msgFile3BgOver?: TelegramThemeProperty;
+  msgFile3BgSelected?: TelegramThemeProperty;
+  msgFile4Bg?: TelegramThemeProperty;
+  msgFile4BgDark?: TelegramThemeProperty;
+  msgFile4BgOver?: TelegramThemeProperty;
+  msgFile4BgSelected?: TelegramThemeProperty;
+  historyFileInIconFg?: TelegramThemeProperty;
+  historyFileInIconFgSelected?: TelegramThemeProperty;
+  historyFileInRadialFg?: TelegramThemeProperty;
+  historyFileInRadialFgSelected?: TelegramThemeProperty;
+  historyFileOutIconFg?: TelegramThemeProperty;
+  historyFileOutIconFgSelected?: TelegramThemeProperty;
+  historyFileOutRadialFg?: TelegramThemeProperty;
+  historyFileOutRadialFgSelected?: TelegramThemeProperty;
+  historyFileThumbIconFg?: TelegramThemeProperty;
+  historyFileThumbIconFgSelected?: TelegramThemeProperty;
+  historyFileThumbRadialFg?: TelegramThemeProperty;
+  historyFileThumbRadialFgSelected?: TelegramThemeProperty;
+  msgWaveformInActive?: TelegramThemeProperty;
+  msgWaveformInActiveSelected?: TelegramThemeProperty;
+  msgWaveformInInactive?: TelegramThemeProperty;
+  msgWaveformInInactiveSelected?: TelegramThemeProperty;
+  msgWaveformOutActive?: TelegramThemeProperty;
+  msgWaveformOutActiveSelected?: TelegramThemeProperty;
+  msgWaveformOutInactive?: TelegramThemeProperty;
+  msgWaveformOutInactiveSelected?: TelegramThemeProperty;
+  msgBotKbOverBgAdd?: TelegramThemeProperty;
+  msgBotKbIconFg?: TelegramThemeProperty;
+  msgBotKbRippleBg?: TelegramThemeProperty;
+  mediaInFg?: TelegramThemeProperty;
+  mediaInFgSelected?: TelegramThemeProperty;
+  mediaOutFg?: TelegramThemeProperty;
+  mediaOutFgSelected?: TelegramThemeProperty;
+  youtubePlayIconBg?: TelegramThemeProperty;
+  youtubePlayIconFg?: TelegramThemeProperty;
+  videoPlayIconBg?: TelegramThemeProperty;
+  videoPlayIconFg?: TelegramThemeProperty;
+  toastBg?: TelegramThemeProperty;
+  toastFg?: TelegramThemeProperty;
+  reportSpamBg?: TelegramThemeProperty;
+  reportSpamFg?: TelegramThemeProperty;
+  historyToDownBg?: TelegramThemeProperty;
+  historyToDownBgOver?: TelegramThemeProperty;
+  historyToDownBgRipple?: TelegramThemeProperty;
+  historyToDownFg?: TelegramThemeProperty;
+  historyToDownFgOver?: TelegramThemeProperty;
+  historyToDownShadow?: TelegramThemeProperty;
+  historyComposeAreaBg?: TelegramThemeProperty;
+  historyComposeAreaFg?: TelegramThemeProperty;
+  historyComposeAreaFgService?: TelegramThemeProperty;
+  historyComposeIconFg?: TelegramThemeProperty;
+  historyComposeIconFgOver?: TelegramThemeProperty;
+  historySendIconFg?: TelegramThemeProperty;
+  historySendIconFgOver?: TelegramThemeProperty;
+  historyPinnedBg?: TelegramThemeProperty;
+  historyReplyBg?: TelegramThemeProperty;
+  historyReplyIconFg?: TelegramThemeProperty;
+  historyReplyCancelFg?: TelegramThemeProperty;
+  historyReplyCancelFgOver?: TelegramThemeProperty;
+  historyComposeButtonBg?: TelegramThemeProperty;
+  historyComposeButtonBgOver?: TelegramThemeProperty;
+  historyComposeButtonBgRipple?: TelegramThemeProperty;
+  overviewCheckBg?: TelegramThemeProperty;
+  overviewCheckFg?: TelegramThemeProperty;
+  overviewCheckFgActive?: TelegramThemeProperty;
+  overviewPhotoSelectOverlay?: TelegramThemeProperty;
+  profileStatusFgOver?: TelegramThemeProperty;
+  profileVerifiedCheckBg?: TelegramThemeProperty;
+  profileVerifiedCheckFg?: TelegramThemeProperty;
+  profileAdminStartFg?: TelegramThemeProperty;
+  notificationsBoxMonitorFg?: TelegramThemeProperty;
+  notificationsBoxScreenBg?: TelegramThemeProperty;
+  notificationSampleUserpicFg?: TelegramThemeProperty;
+  notificationSampleCloseFg?: TelegramThemeProperty;
+  notificationSampleTextFg?: TelegramThemeProperty;
+  notificationSampleNameFg?: TelegramThemeProperty;
+  mainMenuBg?: TelegramThemeProperty;
+  mainMenuCoverBg?: TelegramThemeProperty;
+  mainMenuCoverFg?: TelegramThemeProperty;
+  mediaPlayerBg?: TelegramThemeProperty;
+  mediaPlayerActiveFg?: TelegramThemeProperty;
+  mediaPlayerInactiveFg?: TelegramThemeProperty;
+  mediaPlayerDisabledFg?: TelegramThemeProperty;
+  mediaviewFileBg?: TelegramThemeProperty;
+  mediaviewFileNameFg?: TelegramThemeProperty;
+  mediaviewFileSizeFg?: TelegramThemeProperty;
+  mediaviewFileRedCornerFg?: TelegramThemeProperty;
+  mediaviewFileYellowCornerFg?: TelegramThemeProperty;
+  mediaviewFileGreenCornerFg?: TelegramThemeProperty;
+  mediaviewFileBlueCornerFg?: TelegramThemeProperty;
+  mediaviewFileExtFg?: TelegramThemeProperty;
+  mediaviewMenuBg?: TelegramThemeProperty;
+  mediaviewMenuBgOver?: TelegramThemeProperty;
+  mediaviewMenuBgRipple?: TelegramThemeProperty;
+  mediaviewMenuFg?: TelegramThemeProperty;
+  mediaviewBg?: TelegramThemeProperty;
+  mediaviewVideoBg?: TelegramThemeProperty;
+  mediaviewControlBg?: TelegramThemeProperty;
+  mediaviewControlFg?: TelegramThemeProperty;
+  mediaviewCaptionBg?: TelegramThemeProperty;
+  mediaviewCaptionFg?: TelegramThemeProperty;
+  mediaviewTextLinkFg?: TelegramThemeProperty;
+  mediaviewSaveMsgBg?: TelegramThemeProperty;
+  mediaviewSaveMsgFg?: TelegramThemeProperty;
+  mediaviewPlaybackActive?: TelegramThemeProperty;
+  mediaviewPlaybackInactive?: TelegramThemeProperty;
+  mediaviewPlaybackActiveOver?: TelegramThemeProperty;
+  mediaviewPlaybackInactiveOver?: TelegramThemeProperty;
+  mediaviewPlaybackProgressFg?: TelegramThemeProperty;
+  mediaviewPlaybackIconFg?: TelegramThemeProperty;
+  mediaviewPlaybackIconFgOver?: TelegramThemeProperty;
+  mediaviewTransparentBg?: TelegramThemeProperty;
+  mediaviewTransparentFg?: TelegramThemeProperty;
+  notificationBg?: TelegramThemeProperty;
 }
 
 export type ThemeKey = keyof BaseTheme;
