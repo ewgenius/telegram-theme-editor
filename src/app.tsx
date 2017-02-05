@@ -15,12 +15,7 @@ injectTapEventPlugin();
 
 const store = createStore(reducer, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__());
 
-const theme = getMuiTheme({
-  appBar: {
-    height: 54,
-    textColor: '#a8a8a8'
-  }
-}, lightBaseTheme);
+const theme = getMuiTheme({}, lightBaseTheme);
 
 render(<Provider store={store}>
   <MuiThemeProvider muiTheme={theme}>

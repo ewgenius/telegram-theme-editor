@@ -4,6 +4,7 @@ import { Component, Props } from 'react';
 import { TelegramTheme, getPropertyValue, ThemeKey } from '../../lib/TelegramTheme';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import AppBar from 'material-ui/AppBar';
 
 interface ThemeEditorProps extends Props<ThemeEditor> {
   theme: TelegramTheme;
@@ -23,7 +24,10 @@ export default class ThemeEditor extends Component<ThemeEditorProps, {}> {
     const {theme} = this.props;
 
     return <div className='theme-editor'>
-      <List>
+      <AppBar
+        showMenuIconButton={false}
+        title='Theme settings' />
+      <div className='scroller'>
         {
           Object.keys(theme).map((key: ThemeKey) => {
             const property = theme[key];
@@ -36,7 +40,7 @@ export default class ThemeEditor extends Component<ThemeEditorProps, {}> {
               onTouchTap={() => this.props.onChangeProperty(key, property.value, property.ref)} />;
           })
         }
-      </List>
+      </div>
     </div>;
   }
 }

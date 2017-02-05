@@ -1,6 +1,7 @@
 .theme-editor {
   height: 100%;
   z-index: 1102;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
 }

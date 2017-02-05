@@ -111,7 +111,15 @@ export default class TelegramApp extends Component<{
       color: getPropertyValue(theme, 'windowFg')
     };
     return <div className='telegram-app' style={windowStyle}>
-      {this.renderContent()}
+      <div className='telegram-window-title'>
+        <button className='btn-close' />
+        <button className='btn-hide' />
+        <button className='btn-expand' />
+        <div className='title'>Telegram</div>
+      </div>
+      <div className='telegram-window-content'>
+        {this.renderContent()}
+      </div>
     </div>;
   }
 }
