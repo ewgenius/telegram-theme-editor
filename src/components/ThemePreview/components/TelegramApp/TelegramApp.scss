@@ -4,9 +4,12 @@ $sidebarWidth: 280px;
   height: 100%;
   display: flex;
   flex-flow: column;
-  box-shadow: 0 0px 1px rgba(#000, 0.1);
+  box-shadow: 0 8px 32px rgba(#000, 0.4);
   border: 1px solid #c7c7c7;
   border-radius: 5px 5px 0 0;
+  * {
+    user-select: none;
+  }
   .telegram-window-title {
     display: flex;
     flex-flow: row;

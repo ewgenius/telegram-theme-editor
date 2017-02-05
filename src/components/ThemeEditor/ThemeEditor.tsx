@@ -5,6 +5,8 @@ import { TelegramTheme, getPropertyValue, ThemeKey } from '../../lib/TelegramThe
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import HelpIcon from 'material-ui/svg-icons/action/help';
 
 interface ThemeEditorProps extends Props<ThemeEditor> {
   theme: TelegramTheme;
@@ -26,7 +28,10 @@ export default class ThemeEditor extends Component<ThemeEditorProps, {}> {
     return <div className='theme-editor'>
       <AppBar
         showMenuIconButton={false}
-        title='Theme settings' />
+        title='Theme settings'
+        iconElementRight={<IconButton>
+          <HelpIcon />
+        </IconButton>} />
       <div className='scroller'>
         {
           Object.keys(theme).map((key: ThemeKey) => {
