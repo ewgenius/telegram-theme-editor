@@ -6,7 +6,7 @@ $sidebarWidth: 280px;
   flex-flow: column;
   box-shadow: 0 8px 32px rgba(#000, 0.4);
   border: 1px solid #c7c7c7;
-  border-radius: 5px 5px 0 0;
+  border-radius: 6px 6px 0 0;
   * {
     user-select: none;
   }
@@ -15,7 +15,7 @@ $sidebarWidth: 280px;
     flex-flow: row;
     height: 21px;
     background-color: #f1f1f1;
-    border-radius: 5px 5px 0 0;
+    border-radius: 6px 6px 0 0;
     border-bottom: 1px solid #eeeeee;
     align-items: center;
     font-family: Helvetica, sans-serif;
@@ -138,6 +138,9 @@ $sidebarWidth: 280px;
       font-size: 14px;
       padding: 0 14px;
       outline: none !important;
+    }
+    .scroller {
+      margin-bottom: 8px;
     }
   }
   .telegram-chat-view {
