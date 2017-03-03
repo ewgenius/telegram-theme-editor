@@ -1,5 +1,7 @@
 ## Telegram Theme Editor (in progress)
 
+DEPRECATED - now theme editor is integrated in telegram app, this project is not actual((
+
 # TODO:
 
 * [x] - list default theme parameters
